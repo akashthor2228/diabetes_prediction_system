@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f2f6ff;
+        margin: 0;
+        padding: 0;
+    }
+
+    h2 {
+        text-align: center;
+        color: #333;
+        margin-top: 30px;
+    }
+
+    form {
+        width: 350px;
+        background: #fff;
+        padding: 25px;
+        margin: 30px auto;
+        border-radius: 10px;
+        box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+    }
+
+    label {
+        font-weight: bold;
+        color: #444;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    input[type="text"]:focus {
+        border-color: #4a90e2;
+        outline: none;
+        box-shadow: 0px 0px 5px rgba(74,144,226,0.5);
+    }
+
+    input[type="submit"] {
+        width: 100%;
+        padding: 12px;
+        background: #4a90e2;
+        border: none;
+        color: white;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    input[type="submit"]:hover {
+        background: #3578c9;
+    }
+
+    h3 {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 20px;
+    }
+</style>
+
+   <title>Diabetes Prediction</title>
+</head>
+<body>
+   <h2>Enter Patient Details</h2>
+   <form method="post" action="/predict">
+       <label>Number of Pregnancies:</label><br>
+       <input type="text" name="num_preg" placeholder="e.g., 2" value="{{ form_data.num_preg if form_data else '' }}"><br><br>
+
+
+       <label>Glucose Concentration:</label><br>
+       <input type="text" name="glucose_conc" placeholder="e.g., 120" value="{{ form_data.glucose_conc if form_data else '' }}"><br><br>
+
+
+       <label>Diastolic Blood Pressure:</label><br>
+       <input type="text" name="diastolic_bp" placeholder="e.g., 70" value="{{ form_data.diastolic_bp if form_data else '' }}"><br><br>
+
+
+       <label>Insulin:</label><br>
+       <input type="text" name="insulin" placeholder="e.g., 94" value="{{ form_data.insulin if form_data else '' }}"><br><br>
+
+
+       <label>BMI:</label><br>
+       <input type="text" name="bmi" placeholder="e.g., 30.5" value="{{ form_data.bmi if form_data else '' }}"><br><br>
+
+
+       <label>Diabetes Pedigree Function:</label><br>
+       <input type="text" name="diab_pred" placeholder="e.g., 0.372" value="{{ form_data.diab_pred if form_data else '' }}"><br><br>
+
+
+       <label>Age:</label><br>
+       <input type="text" name="age" placeholder="e.g., 33" value="{{ form_data.age if form_data else '' }}"><br><br>
+
+
+       <label>Skin Thickness:</label><br>
+       <input type="text" name="skin" placeholder="e.g., 20" value="{{ form_data.skin if form_data else '' }}"><br><br>
+
+
+       <input type="submit" value="Predict">
+   </form>
+
+
+{% if prediction_text %}
+    {% if result == "Prediction: Diabetic" %}
+        <h3 style="color: green;">{{ prediction_text }}</h3>
+    {% else %}
+        <h3 style="color: red;">{{ prediction_text }}</h3>
+    {% endif %}
+{% endif %}
+</body>
+</html>
+
